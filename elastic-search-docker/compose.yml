@@ -1,0 +1,28 @@
+version: "1.0.0"
+services:
+    elasticsearch:
+        container_name: es-container
+        image: elasticsearch:7.17.21
+        networks:
+            - es-net
+        ports:
+            - 9200:9200
+        environment:
+            - xpack.security.enabled=false
+            - discovery.type=single-node
+        volumes:
+            - ./volume/elasticsearch-data:/usr/share/elasticsearch/data
+    kibana:
+        container_name: kb-container
+        image: kibana:7.17.21
+        networks:
+            - es-net
+        ports:
+            - 5601:5601
+        environment:
+            - ELASTICSEARCH_HOSTS=http://es-container:9200
+        depends_on:
+            - elasticsearch
+networks:
+    es-net:
+        driver: bridge

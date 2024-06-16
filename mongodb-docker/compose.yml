@@ -1,0 +1,31 @@
+version: "1"
+services:
+    mongodb:
+        container_name: mongo-container
+        image: mongo
+        networks:
+            - mongo-net
+        ports:
+            - 27017:27017
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=admin
+            - MONGO_INITDB_ROOT_PASSWORD=password
+        volumes:
+            - ./volume/data:/data/db
+            - ./volume/datalog:/datalog
+    mongo-express:
+        container_name: mongo-ex-container
+        image: mongo-express
+        networks:
+            - mongo-net
+        ports:
+            - 8080:8081
+        environment:
+            - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+            - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+            - ME_CONFIG_MONGODB_SERVER=mongodb
+        depends_on:
+            - mongodb
+networks:
+    mongo-net:
+        driver: bridge

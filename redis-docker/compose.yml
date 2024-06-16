@@ -1,0 +1,28 @@
+version: "3"
+services:
+    redis:
+        image: redis:latest
+        container_name: redis-container
+        restart: always
+        ports:
+            - 6379:6379
+        networks:
+            - redis-net
+        volumes:
+            - ./volume/redis/data:/data
+        environment:
+            - REDIS_PORT=6379
+            - REDIS_DATABASE=16
+    redis_insight:
+        image: redislabs/redisinsight:latest
+        container_name: redis_insight_container
+        restart: always
+        ports:
+            - 5540:5540
+        networks:
+            - redis-net
+        volumes:
+            - ./volume/redis_insight/data:/db
+networks:
+    redis-net:
+        driver: bridge

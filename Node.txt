@@ -1,3 +1,10 @@
 npm i express dotenv
 npm i -D typescript @types/express @types/node nodemon ts-node
 npx tsc --init
+
+// Using same node_module
+1. create a parent npm (npm init)
+2. install neccessary packages
+3. create a child folder and name it
+4. create this child folder npm (npm init)
+5. tap 'npm link'
