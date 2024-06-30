@@ -16,4 +16,4 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
 });
-// npm2 start ./app1.js ./app2.js ./app3.js
+// pm2 start ./app1.js ./app2.js ./app3.js
